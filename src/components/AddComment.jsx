@@ -9,6 +9,29 @@ class AddComment extends Component {
     rate: 0,
   };
 
+  async sendComment() {
+    try {
+      let post = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/" +
+          this.props.bookAsin,
+        {
+          method: "POST",
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U1MThjZGEyNDc4ZDAwMTNhMDU4NjciLCJpYXQiOjE2NzU5NTg5NjMsImV4cCI6MTY3NzE2ODU2M30.Q1jX-HShMVTgkyRHM4th05_jV0PN_rkjeroFWeC2A1M",
+            "Content-Type": "application/json",
+          },
+          body: {
+            author: "francesco@abc.it",
+            comment: "bello",
+          },
+        }
+      );
+    } catch (e) {
+      console.log("error in fetch comments", e);
+    }
+  }
+
   updateEmail = (e) => {
     this.setState({ email: e.target.value });
   };
@@ -20,7 +43,7 @@ class AddComment extends Component {
     return (
       <Row>
         <Col>
-          <Form>
+          <Form onSubmit={this.sendComment}>
             <Form.Group className="mb-1" controlId="form.control.mail">
               <Form.Control
                 type="email"
@@ -36,6 +59,7 @@ class AddComment extends Component {
                 onChange={(e) => this.updateComment(e)}
               />
             </Form.Group>
+            <Button>invia</Button>
           </Form>
         </Col>
       </Row>

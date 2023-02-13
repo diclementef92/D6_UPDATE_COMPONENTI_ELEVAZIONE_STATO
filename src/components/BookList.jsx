@@ -1,14 +1,20 @@
 import SingleBook from "./SingleBook";
 import { Component } from "react";
 import { Row, Col, Form, FormControl, FormGroup } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   state = {
     textToSearch: "",
+    book_selected: "", //asin del libro
   };
   saveTextToSearch(value) {
     this.setState({ textToSearch: value });
   }
+
+  setBookClicked = (value) => {
+    this.setState({ book_selected: value });
+  };
 
   render() {
     return (
@@ -38,8 +44,17 @@ class BookList extends Component {
                   .includes(this.state.textToSearch.toLowerCase())
               )
               .map((b) => {
-                return <SingleBook book={b} key={`book-${b.asin}`} />;
+                return (
+                  <SingleBook
+                    setBookClicked={this.setBookClicked}
+                    book={b}
+                    key={`book-${b.asin}`}
+                  />
+                );
               })}
+          </Col>
+          <Col>
+            <CommentArea book_asin={this.state.book_selected}></CommentArea>
           </Col>
         </Row>
       </>

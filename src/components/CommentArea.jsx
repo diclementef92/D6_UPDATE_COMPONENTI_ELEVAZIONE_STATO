@@ -5,14 +5,11 @@ import AddComment from "./AddComment";
 
 class CommentArea extends Component {
   state = {
-    comments: [],
     isLoading: false,
+    comments: [],
   };
 
-  componentDidMount = async () => {
-    this.setState({
-      isLoading: true,
-    });
+  async retriveComments() {
     try {
       let res = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
@@ -38,7 +35,14 @@ class CommentArea extends Component {
         isLoading: false,
       });
     }
-  };
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps);
+    if (prevProps.book_asin !== this.props.book_asin) {
+      this.retriveComments();
+    }
+  }
 
   render() {
     return (
@@ -55,7 +59,7 @@ class CommentArea extends Component {
           ) : (
             <p>Ancora nessun commento</p>
           )}
-          <AddComment />
+          <AddComment bookAsin={this.props.book_asin} />
         </Card>
       </>
     );

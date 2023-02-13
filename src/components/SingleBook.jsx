@@ -1,20 +1,6 @@
 import { Component } from "react";
-import { Col } from "react-bootstrap";
-import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
-
-  bookClicked = (event) => {
-    console.dir(event.target.parentNode);
-    this.setState({
-      selected: !this.state.selected,
-    });
-    event.target.parentNode.classList.toggle("card-selected");
-  };
-
   render() {
     return (
       <>
@@ -23,7 +9,7 @@ class SingleBook extends Component {
             className="card-img-top "
             src={this.props.book.img}
             alt="cover-libro"
-            onClick={this.bookClicked}
+            onClick={() => this.props.setBookClicked(this.props.book.asin)}
           />
           <div className="card-body">
             <h5 className="card-title">{this.props.book.title}</h5>
