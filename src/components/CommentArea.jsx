@@ -38,7 +38,7 @@ class CommentArea extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps);
+    console.log("update!:", prevProps);
     if (prevProps.book_asin !== this.props.book_asin) {
       this.retriveComments();
     }

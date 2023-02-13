@@ -5,7 +5,7 @@ class SingleBook extends Component {
     selected: false,
   };
   toggleClassSelected(e) {
-    console.log("carta cliccata", e.target.parentNode);
+    // console.log("carta cliccata", e.target.parentNode);
     e.target.parentNode.classList.toggle("selected");
   }
 
@@ -19,6 +19,7 @@ class SingleBook extends Component {
             alt="cover-libro"
             onClick={(e) => {
               this.props.setBookClicked(this.props.book.asin);
+              // console.log(this.props.book.asin);
               this.toggleClassSelected(e);
             }}
           />

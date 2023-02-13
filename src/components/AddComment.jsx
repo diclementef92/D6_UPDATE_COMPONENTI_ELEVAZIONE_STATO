@@ -6,11 +6,14 @@ class AddComment extends Component {
   state = {
     author: "",
     comment: "",
-    rate: 0,
+    // rate: 0,
   };
 
-  async sendComment() {
+  sendComment = async (e) => {
+    e.preventDefault();
+
     console.log("invia commento");
+
     let settings = {
       method: "POST",
       headers: {
@@ -19,19 +22,18 @@ class AddComment extends Component {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U1MThjZGEyNDc4ZDAwMTNhMDU4NjciLCJpYXQiOjE2NzU5NTg5NjMsImV4cCI6MTY3NzE2ODU2M30.Q1jX-HShMVTgkyRHM4th05_jV0PN_rkjeroFWeC2A1M",
       },
-      body: JSON.stringify({
-        author: "francesco@abc.it",
-        comment: "bello",
-      }),
+      body: JSON.stringify(this.state),
     };
     try {
-      let response = await fetch(
+      console.log("props.book_asin:", this.props.book_asin);
+
+      const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
           this.props.book_asin,
         settings
       );
       if (response.ok) {
-        let body = await response.json();
+        const body = await response.json();
         console.log(body);
       } else {
         console.log(response.status, response);
@@ -39,10 +41,10 @@ class AddComment extends Component {
     } catch (e) {
       console.log("error in fetch comments", e);
     }
-  }
+  };
 
   updateEmail = (e) => {
-    this.setState({ email: e.target.value });
+    this.setState({ author: e.target.value });
   };
   updateComment = (e) => {
     this.setState({ comment: e.target.value });
@@ -52,11 +54,11 @@ class AddComment extends Component {
     return (
       <Row>
         <Col>
-          <Form>
+          <Form onSubmit={(e) => this.sendComment(e)}>
             <Form.Group className="mb-1" controlId="form.control.mail">
               <Form.Control
                 type="email"
-                placeholder="la tua mail"
+                placeholder="La tua mail"
                 onChange={(e) => this.updateEmail(e)}
               />
             </Form.Group>
@@ -64,11 +66,11 @@ class AddComment extends Component {
               <Form.Control
                 as="textarea"
                 rows={1}
-                placeholder="dicci cosa ne pensi"
+                placeholder="Dicci cosa ne pensi..."
                 onChange={(e) => this.updateComment(e)}
               />
             </Form.Group>
-            <Button onClick={this.sendComment}>invia</Button>
+            <Button type="submit">invia</Button>
           </Form>
         </Col>
       </Row>
