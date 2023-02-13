@@ -1,6 +1,14 @@
 import { Component } from "react";
 
 class SingleBook extends Component {
+  state = {
+    selected: false,
+  };
+  toggleClassSelected(e) {
+    console.log("carta cliccata", e.target.parentNode);
+    e.target.parentNode.classList.toggle("selected");
+  }
+
   render() {
     return (
       <>
@@ -9,7 +17,10 @@ class SingleBook extends Component {
             className="card-img-top "
             src={this.props.book.img}
             alt="cover-libro"
-            onClick={() => this.props.setBookClicked(this.props.book.asin)}
+            onClick={(e) => {
+              this.props.setBookClicked(this.props.book.asin);
+              this.toggleClassSelected(e);
+            }}
           />
           <div className="card-body">
             <h5 className="card-title">{this.props.book.title}</h5>

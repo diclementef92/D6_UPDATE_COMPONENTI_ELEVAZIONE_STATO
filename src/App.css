@@ -47,7 +47,7 @@
 .card-img-top {
   height: 18rem;
 }
-.card.card-selected {
+.card.selected {
   border: 2px solid blue;
   /* background-color: azure; */
 }

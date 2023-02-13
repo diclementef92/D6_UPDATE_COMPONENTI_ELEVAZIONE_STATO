@@ -3,8 +3,6 @@ import { ListGroup } from "react-bootstrap";
 import SingleComment from "./SingleComment";
 
 class CommentsList extends Component {
-  state = {};
-
   render() {
     return (
       <ListGroup variant="flush">

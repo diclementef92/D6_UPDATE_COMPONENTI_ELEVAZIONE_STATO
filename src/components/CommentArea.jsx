@@ -59,7 +59,7 @@ class CommentArea extends Component {
           ) : (
             <p>Ancora nessun commento</p>
           )}
-          <AddComment bookAsin={this.props.book_asin} />
+          <AddComment book_asin={this.props.book_asin} />
         </Card>
       </>
     );

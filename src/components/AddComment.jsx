@@ -4,29 +4,38 @@ import { Chat } from "react-bootstrap-icons";
 
 class AddComment extends Component {
   state = {
-    email: "",
+    author: "",
     comment: "",
     rate: 0,
   };
 
   async sendComment() {
+    console.log("invia commento");
+    let settings = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U1MThjZGEyNDc4ZDAwMTNhMDU4NjciLCJpYXQiOjE2NzU5NTg5NjMsImV4cCI6MTY3NzE2ODU2M30.Q1jX-HShMVTgkyRHM4th05_jV0PN_rkjeroFWeC2A1M",
+      },
+      body: JSON.stringify({
+        author: "francesco@abc.it",
+        comment: "bello",
+      }),
+    };
     try {
-      let post = await fetch(
+      let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.bookAsin,
-        {
-          method: "POST",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U1MThjZGEyNDc4ZDAwMTNhMDU4NjciLCJpYXQiOjE2NzU5NTg5NjMsImV4cCI6MTY3NzE2ODU2M30.Q1jX-HShMVTgkyRHM4th05_jV0PN_rkjeroFWeC2A1M",
-            "Content-Type": "application/json",
-          },
-          body: {
-            author: "francesco@abc.it",
-            comment: "bello",
-          },
-        }
+          this.props.book_asin,
+        settings
       );
+      if (response.ok) {
+        let body = await response.json();
+        console.log(body);
+      } else {
+        console.log(response.status, response);
+      }
     } catch (e) {
       console.log("error in fetch comments", e);
     }
@@ -43,7 +52,7 @@ class AddComment extends Component {
     return (
       <Row>
         <Col>
-          <Form onSubmit={this.sendComment}>
+          <Form>
             <Form.Group className="mb-1" controlId="form.control.mail">
               <Form.Control
                 type="email"
@@ -59,7 +68,7 @@ class AddComment extends Component {
                 onChange={(e) => this.updateComment(e)}
               />
             </Form.Group>
-            <Button>invia</Button>
+            <Button onClick={this.sendComment}>invia</Button>
           </Form>
         </Col>
       </Row>
