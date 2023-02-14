@@ -37,12 +37,14 @@
   }
 }
 
+/* BOOK CARD */
 .singlebook {
-  width: 18rem;
+  /* width: 18rem; */
   transition: all 400ms;
 }
 .singlebook:hover {
   transform: scale(1.06);
+  z-index: 1;
 }
 .card-img-top {
   height: 18rem;
@@ -50,4 +52,9 @@
 .card.selected {
   border: 2px solid blue;
   /* background-color: azure; */
+}
+
+/* COMMENTS */
+.commentAuthor {
+  font-weight: bold;
 }

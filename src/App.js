@@ -4,7 +4,7 @@ import MyNav from "./components/MyNav";
 import MyFooter from "./components/MyFooter";
 import Welcome from "./components/Welcome";
 import BookList from "./components/BookList";
-import scifiBooks from "./books/scifi.json";
+import fantasybooks from "./books/fantasy.json";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <MyNav items={["Home", "About", "Browse"]} />
       <Container>
         <Welcome text="Francesco" />
-        <BookList books={scifiBooks} />
+        <BookList books={fantasybooks} />
       </Container>
       <MyFooter />
     </div>

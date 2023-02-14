@@ -13,7 +13,7 @@ class CommentArea extends Component {
     try {
       let res = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.book_asin,
+          this.props.bookAsin,
         {
           method: "GET",
           headers: {
@@ -39,7 +39,7 @@ class CommentArea extends Component {
 
   componentDidUpdate(prevProps) {
     console.log("update!:", prevProps);
-    if (prevProps.book_asin !== this.props.book_asin) {
+    if (prevProps.bookAsin !== this.props.bookAsin) {
       this.retriveComments();
     }
   }
@@ -47,7 +47,10 @@ class CommentArea extends Component {
   render() {
     return (
       <>
-        <Card.Header className="p-0">COMMENTI</Card.Header>
+        <Card.Header className="p-0">
+          <h1>👈Seleziona un libro</h1>
+          COMMENTI
+        </Card.Header>
         <Card>
           {this.state.isLoading && (
             <div className="ml-2">
@@ -59,7 +62,7 @@ class CommentArea extends Component {
           ) : (
             <p>Ancora nessun commento</p>
           )}
-          <AddComment book_asin={this.props.book_asin} />
+          <AddComment bookAsin={this.props.bookAsin} />
         </Card>
       </>
     );

@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Col } from "react-bootstrap";
 
 class SingleBook extends Component {
   state = {
@@ -7,14 +8,15 @@ class SingleBook extends Component {
   toggleClassSelected(e) {
     // console.log("carta cliccata", e.target.parentNode);
     e.target.parentNode.classList.toggle("selected");
+    this.setState({ selected: !this.state.selected });
   }
 
   render() {
     return (
-      <>
-        <div className="card m-2 singlebook">
+      <Col sm={12} md={6} xl={4}>
+        <div className="card singlebook">
           <img
-            className="card-img-top "
+            className="card-img-top"
             src={this.props.book.img}
             alt="cover-libro"
             onClick={(e) => {
@@ -31,7 +33,7 @@ class SingleBook extends Component {
             </a>
           </div>
         </div>
-      </>
+      </Col>
     );
   }
 }

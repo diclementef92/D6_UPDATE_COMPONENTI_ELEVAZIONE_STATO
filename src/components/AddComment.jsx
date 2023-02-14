@@ -9,7 +9,7 @@ class AddComment extends Component {
     // rate: 0,
   };
 
-  sendComment = async (e) => {
+  async sendComment(e) {
     e.preventDefault();
 
     console.log("invia commento");
@@ -25,11 +25,11 @@ class AddComment extends Component {
       body: JSON.stringify(this.state),
     };
     try {
-      console.log("props.book_asin:", this.props.book_asin);
+      console.log("props.bookAsin:", this.props.bookAsin);
 
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.book_asin,
+          this.props.bookAsin,
         settings
       );
       if (response.ok) {
@@ -41,7 +41,7 @@ class AddComment extends Component {
     } catch (e) {
       console.log("error in fetch comments", e);
     }
-  };
+  }
 
   updateEmail = (e) => {
     this.setState({ author: e.target.value });
@@ -79,16 +79,3 @@ class AddComment extends Component {
 }
 
 export default AddComment;
-// <Form onSubmit={this.addComment}>
-//   <Form.Group>
-//     <Form.Control type="text" placeholder="la tua email" name="email" />
-//     <Form.Control
-//       type="text"
-//       placeholder="il tuo commento"
-//       name="comment"
-//     />
-//     <Button>invia</Button>
-//   </Form.Group>
-
-//   {/* <Chat onClick={() => this.addComment()} className="bi bi-chat"></Chat> */}
-// </Form>

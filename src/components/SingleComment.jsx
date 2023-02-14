@@ -7,8 +7,10 @@ class SingleComment extends Component {
   render() {
     return (
       <ListGroup.Item>
-        <p>{this.props.comment.author}</p>
-        <p> {this.props.comment.comment}</p>
+        <span className="commentAuthor">
+          {this.props.comment.author} ha scritto:
+        </span>
+        <p className="commentText"> {this.props.comment.comment}</p>
         {/* <p> {this.props.comment.updatedAt}</p> */}
       </ListGroup.Item>
     );
